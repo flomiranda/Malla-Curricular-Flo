@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Malla Curricular de Florencia</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 20px; }
+    h1 { text-align: center; }
+    .semestre { margin-bottom: 30px; }
+    .ramos { display: flex; flex-wrap: wrap; gap: 10px; }
+    .ramo {
+      background: white;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 200px;
+      transition: background 0.3s;
+    }
+    .aprobado {
+      background-color: #c6f6c6 !important;
+      border: 1px solid green;
+    }
+    a { text-decoration: none; color: #007bff; }
+  </style>
+</head>
+<body>
+  <h1>Malla Curricular de Florencia</h1>
+
+  <div id="malla"></div>
+
+  <script>
+    // Lista de semestres y ramos (edítala más adelante con tus nombres y links)
+    const malla = [
+      {
+        semestre: 1,
+        ramos: [
+          { nombre: "Biología Celular", link: "https://drive.google.com/..." },
+          { nombre: "Química General", link: "" },
+          { nombre: "Anatomía I", link: "" }
+        ]
+      },
+      {
+        semestre: 2,
+        ramos: [
+          { nombre: "Fisiología", link: "" },
+          { nombre: "Química Orgánica", link: "" },
+          { nombre: "Anatomía II", link: "" }
+        ]
+      },
+      // Agrega más semestres acá...
+    ];
+
+    const container = document.getElementById('malla');
+
+    malla.forEach(({ semestre, ramos }) => {
+      const div = document.createElement('div');
+      div.className = 'semestre';
+      div.innerHTML = `<h2>Semestre ${semestre}</h2><div class="ramos"></div>`;
+      const ramosDiv = div.querySelector('.ramos');
+
+      ramos.forEach(({ nombre, link }) => {
+        const ramo = document.createElement('div');
+        ramo.className = 'ramo';
+        ramo.innerHTML = link
+          ? `<strong>${nombre}</strong><br><a href="${link}" target="_blank">Ver Apuntes</a>`
+          : `<strong>${nombre}</strong><br><em>Sin apuntes</em>`;
+        
+        ramo.addEventListener('click', () => {
+          ramo.classList.toggle('aprobado');
+        });
+
+        ramosDiv.appendChild(ramo);
+      });
+
+      container.appendChild(div);
+    });
+  </script>
+</body>
+</html>
